@@ -141,7 +141,7 @@ WHERE salary>100000;
 
 WEEK 2
 
-3.2.25
+3/2/25
 
 use org123;
 select * from worker;
@@ -190,5 +190,46 @@ SELECT 'Account' AS DEPARTMENT, COUNT(WORKER_ID) AS Total_Employees
 FROM Worker 
 WHERE DEPARTMENT = 'Account'
 ORDER BY DEPARTMENT;
+
+
+
+
+4/2/25
+
+
+use org123;
+select * from worker;
+select * from worker where department= 'Admin' order by salary;    
+select * from worker where department= 'Admin' order by department desc;
+select * from worker where department= 'Admin' order by salary desc; 
+select * from worker where department= 'Admin' order by salary desc limit 1;
+
+select department, count(department) as total_employees from worker 
+where department = 'HR' or department = 'Account' group by department;
+
+
+# select department, count(department) as total_employees from worker
+#  group by department;
+# SELECT MIN(total_employees);
+# SELECT MAX(total_employees);  
+
+
+(
+  SELECT department, COUNT(department) AS total_employees
+  FROM worker
+  GROUP BY department
+  ORDER BY total_employees ASC
+  LIMIT 1
+)
+
+UNION ALL
+
+(
+  SELECT department, COUNT(department) AS total_employees
+  FROM worker
+  GROUP BY department
+  ORDER BY total_employees DESC
+  LIMIT 1
+);
 
 
