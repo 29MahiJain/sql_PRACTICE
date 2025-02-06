@@ -233,3 +233,56 @@ UNION ALL
 );
 
 
+6/2/25
+
+use org123;
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255) NOT NULL,
+    Age int
+);
+show tables from org123;
+select * from persons;
+
+ALTER TABLE Persons
+MODIFY Age int NOT NULL;
+
+
+CREATE TABLE Person (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    UNIQUE (ID)
+);
+
+select * from person;
+
+CREATE TABLE Persons1 (
+    ID int primary key,
+    LastName varchar(255) NOT NULL unique,
+    FirstName varchar(255) NOT NULL unique,
+    Age int
+   );
+   
+   CREATE TABLE Persons2 (
+    ID int,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255) ,
+    Age int,
+    PRIMARY KEY (ID)
+);
+
+desc persons1;
+desc persons2;
+
+
+ALTER TABLE Persons
+ADD PRIMARY KEY (ID);
+
+ALTER TABLE Persons
+DROP PRIMARY KEY;
+
+
+
