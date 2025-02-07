@@ -233,6 +233,9 @@ UNION ALL
 );
 
 
+
+
+
 6/2/25
 
 use org123;
@@ -279,6 +282,61 @@ desc persons2;
 
 
 ALTER TABLE Persons
+
+
+
+
+
+7/2/25
+
+use org123;
+create table category(
+c_id int primary key,
+c_name varchar(25) not null unique,
+c_descrp varchar(250) not null
+);
+
+insert into category values (101, 'electronics', 'it stores all set of electronics items');
+
+insert into category values (102, 'furnitures', 'it stores all set of wood items');
+
+select * from category;
+desc category;
+
+
+create table products (
+p_id int primary key,
+p_name varchar(250) not null,
+c_id int,
+constraint c_id foreign key (c_id)
+references category (c_id)
+);
+
+desc products;
+
+
+drop table products;
+
+create table products (
+p_id int primary key,
+p_name varchar(250) not null,
+c_id int not null,
+constraint c_id foreign key (c_id)
+references category (c_id)
+);
+
+insert into products values (901, 'IPhone 14 Pro', 101);
+insert into products values (902, 'wireless eraphone', 101);
+insert into products values (903, 'chair', 102);
+insert into products values (984, 'IPhone 15 Pro', 103);
+select * from products;
+insert into products values (901, 'IPhone 14 Pro', null);
+
+select * from category;
+delete from category where c_id=101;
+drop table category;
+
+
 ADD PRIMARY KEY (ID);
 
 ALTER TABLE Persons
