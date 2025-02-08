@@ -337,6 +337,85 @@ delete from category where c_id=101;
 drop table category;
 
 
+
+
+
+
+
+8/2/25
+
+create database saturday;
+use saturday;
+create table category(
+c_id int primary key,
+c_name varchar(25) not null unique,
+c_decrp varchar(250) not null
+);
+insert into category values (101, 'electronics', 'it stores all set of electronics items');
+insert into category values (102, 'furnitures', 'it stores all set of wooden items');
+select * from category;
+desc category;
+
+CREATE TABLE Products (
+    P_ID int primary key,
+    p_Name varchar(250) NOT NULL,
+    c_id int ,
+    CONSTRAINT c_id FOREIGN KEY (c_id)
+    REFERENCES category(c_id) on delete cascade
+);
+
+desc products;
+
+insert into products values (904, 'Wooden table', null);
+select * from products;
+
+select * from category;
+
+insert into products values (902, 'intel i7 processor', 101);
+select * from products;
+delete from category where c_id=101;
+update products set p_name='wooden chair' where p_id=904;
+select * from products;
+
+
+
+
+
+create table college(
+cid int primary key,
+c_name varchar(25) not null unique,
+c_decrp varchar(250) not null
+);
+insert into college values (101, 'VIT Bhopal', 'in bhopal');
+insert into college values (102, 'VIT Chennai', 'in chennai');
+insert into college values (103, 'VIT vellore', 'in vellore');
+select * from college;
+drop table college;
+CREATE TABLE Departments (
+    D_ID int primary key,
+    D_Name varchar(250) NOT NULL,
+    cid int ,
+    CONSTRAINT cid FOREIGN KEY (cid)
+    REFERENCES college(cid)
+);
+insert into departments values (201, 'CSE', 101);
+insert into departments values (202, 'MECHANICAL', 102);
+insert into departments values (203, 'AEROSPACE', 103);
+select * from Departments;
+CREATE TABLE Students (
+    S_ID int primary key,
+    D_Name varchar(250) NOT NULL,
+    D_id int ,
+    CONSTRAINT D_id FOREIGN KEY (D_id)
+    REFERENCES departments(D_id)
+);
+insert into students values (501, 'aryan', 201);
+insert into students values (502, 'krish', 202);
+insert into students values (503, 'raj', 203);
+select * from students;
+
+
+
 ADD PRIMARY KEY (ID);
 
 ALTER TABLE Persons
