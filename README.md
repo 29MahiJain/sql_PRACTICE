@@ -416,6 +416,130 @@ select * from students;
 
 
 
+
+
+
+
+9/2/25
+
+use saturday;
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    CHECK (Age>=18),
+    salary int,
+    check (salary >= 20000 and salary <=400000)
+);
+
+drop table persons;
+select * from persons;
+ALTER TABLE Persons	
+ADD CHECK (Age>=18);
+desc persons;
+
+CREATE TABLE Persons1 (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    City varchar(255) DEFAULT 'Coimbatore'
+);
+desc persons1;
+
+use org123;
+show tables from org123;
+select * from worker;
+select * from worker where first_name like '%';
+select * from worker where first_name like '_i%';
+select * from worker where first_name like '_i_a%';
+select * from worker where last_name like '_i%';
+select * from worker where last_name like '_i_g%';
+select * from worker where last_name like '_i_gh%';
+select * from worker where salary like '2%';
+select * from worker where salary like '8%';
+select * from worker where joining_date like '_____06%';
+
+select * from worker 
+where department = 'admin' and salary > 100000 order by salary desc;
+
+create view admin_more_salary as
+select * from worker 
+where department = 'admin' and salary > 100000 order by salary desc;
+
+select * from admin_more_salary;
+
+create or replace view admin_higher_salary as
+select * from worker 
+where department = 'admin' and salary > 100000 order by salary desc;
+
+select * from admin_higher_salary;
+
+drop view admin_higher_salary;
+
+
+
+
+use saturday;
+
+CREATE TABLE Worker (
+	WORKER_ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	FIRST_NAME CHAR(25),
+	LAST_NAME CHAR(25),
+	SALARY INT(15),
+	JOINING_DATE DATETIME,
+	DEPARTMENT CHAR(25)
+);
+
+INSERT INTO Worker 
+	(WORKER_ID, FIRST_NAME, LAST_NAME, SALARY, JOINING_DATE, DEPARTMENT) VALUES
+		(001, 'Monika', 'Arora', 100000, '14-02-20 09.00.00', 'HR'),
+		(002, 'Niharika', 'Verma', 80000, '14-06-11 09.00.00', 'Admin'),
+		(003, 'Vishal', 'Singhal', 300000, '14-02-20 09.00.00', 'HR'),
+		(004, 'Amitabh', 'Singh', 500000, '14-02-20 09.00.00', 'Admin'),
+		(005, 'Vivek', 'Bhati', 500000, '14-06-11 09.00.00', 'Admin'),
+		(006, 'Vipul', 'Diwan', 200000, '14-06-11 09.00.00', 'Account'),
+		(007, 'Satish', 'Kumar', 75000, '14-01-20 09.00.00', 'Account'),
+		(008, 'Geetika', 'Chauhan', 90000, '14-04-11 09.00.00', 'Admin');
+
+CREATE TABLE Bonus (
+	WORKER_REF_ID INT,
+	BONUS_AMOUNT INT(10),
+	BONUS_DATE DATETIME,
+	FOREIGN KEY (WORKER_REF_ID)
+		REFERENCES Worker(WORKER_ID)
+        ON DELETE CASCADE
+);
+
+INSERT INTO Bonus 
+	(WORKER_REF_ID, BONUS_AMOUNT, BONUS_DATE) VALUES
+		(001, 5000, '16-02-20'),
+		(002, 3000, '16-06-11'),
+		(003, 4000, '16-02-20'),
+		(001, 4500, '16-02-20'),
+		(002, 3500, '16-06-11');
+        
+        
+SELECT * FROM Worker 
+WHERE FIRST_NAME NOT IN ('Vipul', 'Satish');
+
+SELECT * FROM Worker 
+WHERE FIRST_NAME LIKE '%a';
+
+SELECT * FROM Worker 
+WHERE FIRST_NAME LIKE '_____h';
+
+SELECT DEPARTMENT, COUNT(*) AS Worker_Count 
+FROM Worker 
+GROUP BY DEPARTMENT 
+ORDER BY Worker_Count DESC;
+
+(SELECT * FROM Worker WHERE WORKER_ID = 1)
+UNION ALL
+(SELECT * FROM Worker WHERE WORKER_ID = 1);
+       
+
 ADD PRIMARY KEY (ID);
 
 ALTER TABLE Persons
