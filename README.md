@@ -538,6 +538,120 @@ ORDER BY Worker_Count DESC;
 (SELECT * FROM Worker WHERE WORKER_ID = 1)
 UNION ALL
 (SELECT * FROM Worker WHERE WORKER_ID = 1);
+
+
+
+
+
+
+
+10/2/25
+
+use saturday;
+select * from admin_more_salary;
+select department, count(department) from worker where department in ('admin', 'account') group by department;
+
+select department, count(department) as highest_head_count
+from worker
+group by department
+having count(department) >=3;
+
+SELECT department, COUNT(*) AS department_count
+FROM worker
+GROUP BY department
+ORDER BY department_count DESC
+LIMIT 1 OFFSET 1;
+
+
+create table vitbhopal (id int primary key, name varchar (20) not null, department varchar (25) not null);
+insert into vitbhopal values (101, 'vishnu' , 'cs' ), (102, 'kunal', 'cs'), (104, 'karthik' , 'cs' ), (103, 'arun', 'cs');
+
+create table vit (id int primary key, name varchar (20) not null, college varchar (25) not null);
+insert into vit values (104, 'karthik' , 'chennai' ), (103, 'arun', 'bhopal');
+delete from vit where id= 103;
+select * from vit;
+
+select * from vitbhopal;
+
+select name as winnerOfTheYear from vitbhopal where id= (select id from vit where college='bhopal');
+
+
+
+create database monday;
+use monday;
+CREATE TABLE Worker (
+	WORKER_ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	FIRST_NAME CHAR(25),
+	LAST_NAME CHAR(25),
+	SALARY INT(15),
+	JOINING_DATE DATETIME,
+	DEPARTMENT CHAR(25)
+);
+
+INSERT INTO Worker 
+	(WORKER_ID, FIRST_NAME, LAST_NAME, SALARY, JOINING_DATE, DEPARTMENT) VALUES
+		(001, 'Monika', 'Arora', 100000, '14-02-20 09.00.00', 'HR'),
+		(002, 'Niharika', 'Verma', 80000, '14-06-11 09.00.00', 'Admin'),
+		(003, 'Vishal', 'Singhal', 300000, '14-02-20 09.00.00', 'HR'),
+		(004, 'Amitabh', 'Singh', 500000, '14-02-20 09.00.00', 'Admin'),
+		(005, 'Vivek', 'Bhati', 500000, '14-06-11 09.00.00', 'Admin'),
+		(006, 'Vipul', 'Diwan', 200000, '14-06-11 09.00.00', 'Account'),
+		(007, 'Satish', 'Kumar', 75000, '14-01-20 09.00.00', 'Account'),
+		(008, 'Geetika', 'Chauhan', 90000, '14-04-11 09.00.00', 'Admin');
+
+CREATE TABLE Bonus (
+	WORKER_REF_ID INT,
+	BONUS_AMOUNT INT(10),
+	BONUS_DATE DATETIME,
+	FOREIGN KEY (WORKER_REF_ID)
+		REFERENCES Worker(WORKER_ID)
+        ON DELETE CASCADE
+);
+
+INSERT INTO Bonus 
+	(WORKER_REF_ID, BONUS_AMOUNT, BONUS_DATE) VALUES
+		(001, 5000, '16-02-20'),
+		(002, 3000, '16-06-11'),
+		(003, 4000, '16-02-20'),
+		(001, 4500, '16-02-20'),
+		(002, 3500, '16-06-11');
+CREATE TABLE Title (
+	WORKER_REF_ID INT,
+	WORKER_TITLE CHAR(25),
+	AFFECTED_FROM DATETIME,
+	FOREIGN KEY (WORKER_REF_ID)
+		REFERENCES Worker(WORKER_ID)
+        ON DELETE CASCADE
+);
+
+INSERT INTO Title 
+	(WORKER_REF_ID, WORKER_TITLE, AFFECTED_FROM) VALUES
+ (001, 'Manager', '2016-02-20 00:00:00'),
+ (002, 'Executive', '2016-06-11 00:00:00'),
+ (008, 'Executive', '2016-06-11 00:00:00'),
+ (005, 'Manager', '2016-06-11 00:00:00'),
+ (004, 'Asst. Manager', '2016-06-11 00:00:00'),
+ (007, 'Executive', '2016-06-11 00:00:00'),
+ (006, 'Lead', '2016-06-11 00:00:00'),
+ (003, 'Lead', '2016-06-11 00:00:00');
+ 
+ SELECT DEPARTMENT 
+FROM Worker 
+GROUP BY DEPARTMENT 
+HAVING COUNT(WORKER_ID) < 5;
+
+SELECT * FROM Worker 
+ORDER BY WORKER_ID DESC 
+LIMIT 5;
+
+SELECT * FROM (
+    SELECT * FROM Worker 
+    ORDER BY WORKER_ID DESC 
+    LIMIT 5
+) AS subquery
+ORDER BY WORKER_ID ASC;
+
+
        
 
 ADD PRIMARY KEY (ID);
