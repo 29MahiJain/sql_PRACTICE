@@ -661,3 +661,54 @@ DROP PRIMARY KEY;
 
 
 
+
+
+
+
+
+11/2/25
+
+use monday;
+create table student(
+s_id int primary key,
+s_name varchar(25) not null,
+s_department varchar(25) not null
+);
+
+insert into student values (1001,"Jayanth","ECE"),(1002,"Praveen","CSE"),(1003,"Logesh","Mech"),(1006,'karthick','Aero'),(1007,"Mahesh","Civil");
+
+select * from student;
+
+create table VIT(
+s_id int primary key,
+s_cgpa varchar(5) not null
+);
+insert into vit values (1001,'7.2'),(1002,'8.6'),(1007,'9.25');
+select * from vit;
+ 
+select * from student cross join vit;
+
+select * from student inner join vit where student.s_id = vit.s_id;
+
+select * from student natural join vit;
+
+select * from student natural join  vit where student.s_id = vit.s_id;
+ 
+select * from student left outer join vit on (student.s_id = vit.s_id);
+
+select * from student right outer join vit on (student.s_id = vit.s_id);
+
+select * from student full outer join vit on (student.s_id = vit.s_id);
+
+SELECT W.*
+FROM Worker W
+JOIN Title T ON W.WORKER_ID = T.WORKER_REF_ID
+WHERE T.WORKER_TITLE = 'Manager';
+
+SELECT Worker.* 
+FROM Worker
+INNER JOIN Title ON Worker.WORKER_ID = Title.WORKER_REF_ID
+WHERE Title.WORKER_TITLE = 'Manager';
+
+
+
